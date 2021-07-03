@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>すべてのブロガー</h1>
+{% if blogauthor_list %}
+    <ul>
+    {% for author in blogauthor_list %}
+        <li><a href="{{ author.get_absolute_url }}">{{ author }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>ブロガーがいません。</p>
+{% endif %}
+{% endblock %}

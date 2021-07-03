@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>{{ blog.name }}</h1>
+
+<p><strong>投稿日</strong>　{{ blog.post_date }}</p>
+
+<p><strong>投稿者：</strong>{{ blog.author }}</p>
+
+<p><strong>本文：</strong></p>
+<p>{{ blog.description }}</p>
+
+<div style="margin-left:20px;margin-top:20px">
+    <h4>コメント</h4>
+
+    {% for comment in blog.blogcomment_set.all  %}
+        <hr>
+        <p>{{ comment.author }}  ({{ comment.post_date }}) - {{ comment.description }}</p>
+    {% endfor %}
+    <hr>
+
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'blog_comment' blog.id %}">新しいコメントを追加する。</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">ログイン</a>して新しいコメントを追加する。</p>
+    {% endif %}
+
+</div>
+{% endblock %}
